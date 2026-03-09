@@ -9,6 +9,6 @@ public class FTTeacher extends Teacher{
 
     @Override
     public double calculateSalary(){
-        return 0;
+        return baseSalary * Math.pow(1.1, yearsOfExperience);
     }
 }

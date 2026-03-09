@@ -1,7 +1,7 @@
 public abstract class Teacher {
 
     private String name;
-    private double baseSalary;
+    protected double baseSalary;
 
     public Teacher(String name, double baseSalary) {
         this.name = name;
