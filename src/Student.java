@@ -1,21 +1,24 @@
 public class Student {
 
-    private String id;
+    private static int counter = 0;
+    private String document;
     private String name;
     private int age;
+    private int id;
 
-    public Student(String id, String name, int age) {
-        this.id = id;
+    public Student(String document, String name, int age) {
+        this.document = document;
         this.name = name;
         this.age = age;
+        this.id = counter++;
     }
 
-    public String getId() {
-        return id;
+    public String getDocument() {
+        return document;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setDocument(String document) {
+        this.document = document;
     }
 
     public String getName() {
@@ -32,5 +35,13 @@ public class Student {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
