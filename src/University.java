@@ -5,5 +5,5 @@ public class University {
 
     List<Student> students = new ArrayList<>();
     List<Teacher> teachers = new ArrayList<>();
-    List<Course> classes = new ArrayList<>();
+    List<Course> courses = new ArrayList<>();
 }

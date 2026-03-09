@@ -3,16 +3,19 @@ import java.util.List;
 
 public class Course {
 
+    private static int counter = 0;
     private String name;
     private String classroom;
     private Teacher teacher;
     private List<Student> studentList;
+    private int id;
 
     public Course(String name, String classroom, Teacher teacher) {
         this.name = name;
         this.classroom = classroom;
         this.teacher = teacher;
         this.studentList = new ArrayList<>();
+        this.id = counter++;
     }
 
     public String getName() {
@@ -49,5 +52,13 @@ public class Course {
 
     public void addStudent (Student student){
         studentList.add(student);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

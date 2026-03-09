@@ -1,3 +1,5 @@
+import com.sun.media.sound.FFT;
+
 import java.util.Scanner;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -14,10 +16,10 @@ public class Main {
 
         //Teachers
         //FT = Full Time; PT = Part Time
-        Teacher domicianoFT = new FTTeacher("Domiciano", 2000000, 3);
-        Teacher claudiaFT = new FTTeacher("Claudia", 3500000, 5);
-        Teacher ramiroPT = new PTTeacher("Ramiro", 1500000, 14);
-        Teacher dianaPT = new PTTeacher("Diana", 1250000, 12);
+        Teacher domicianoFT = new FTTeacher("Domiciano", 200000, 3);
+        Teacher claudiaFT = new FTTeacher("Claudia", 350000, 5);
+        Teacher ramiroPT = new PTTeacher("Ramiro", 150000, 14);
+        Teacher dianaPT = new PTTeacher("Diana", 125000, 12);
 
         icesi.teachers.add(domicianoFT);
         icesi.teachers.add(claudiaFT);
@@ -46,18 +48,23 @@ public class Main {
         cl1.addStudent(ricardo);
 
         Course cl2 = new Course("Sistemas operativos", "202M", ramiroPT);
-        cl1.addStudent(sara);
-        cl1.addStudent(darwin);
-        cl1.addStudent(santiago);
+        cl2.addStudent(sara);
+        cl2.addStudent(darwin);
+        cl2.addStudent(santiago);
 
         Course cl3 = new Course("Innovación y emprendimiento", "108F", dianaPT);
-        cl1.addStudent(santiago);
+        cl3.addStudent(santiago);
 
         Course cl4 = new Course("Aplicaciones moviles", "206M", domicianoFT);
-        cl1.addStudent(darwin);
-        cl1.addStudent(daniel);
-        cl1.addStudent(laura);
-        cl1.addStudent(sara);
+        cl4.addStudent(darwin);
+        cl4.addStudent(daniel);
+        cl4.addStudent(laura);
+        cl4.addStudent(sara);
+
+        icesi.courses.add(cl1);
+        icesi.courses.add(cl2);
+        icesi.courses.add(cl3);
+        icesi.courses.add(cl4);
 
         System.out.println("---------------------------------------------------------------------------------------------------------" +
                 "\n-                                           GLOBANT UNIVERSITY                                          -" +
@@ -75,13 +82,67 @@ public class Main {
 
             switch (accion){
                 case 1:
-                    System.out.println("TODOS LOS PROFES");
+                    System.out.println("Estos son nustros profesores:");
+                    for(Teacher teacher : icesi.teachers){
+                        if (teacher.getClass().equals(FTTeacher.class)){
+                            System.out.println("El profesor de tiempo completo: " + teacher.getName() + " Con " + ((FTTeacher) teacher).getYearsOfExperience() + " año(s) de experiencia, un salario base de: " + teacher.getBaseSalary() + " y un salario calculado de: " + teacher.calculateSalary());
+                        }else{
+                            System.out.println("El profesor de tiempo parcial: " + teacher.getName() + " Con " + ((PTTeacher) teacher).getActiveHoursPerWeek() + " hora(s) activas a la semana, un salario base de: " + teacher.getBaseSalary() + " y un salario calculado de: " + teacher.calculateSalary());
+                        }
+                    }
+                    System.out.println("---------------------------------------------------------------------------------------------------------");
                     break;
                 case 2:
-                    System.out.println("TODAS LAS CLASES");
+                    int idClase;
+                    Course clase;
+                    System.out.println("Estas son todas nuestras clases disponibles:");
+                    for(Course course : icesi.courses){
+                        System.out.println("Id:" + course.getId() + " Nombre:" + course.getName());
+                    }
+                    System.out.println("Seleccione una de las clases para ver toda su información (Escriba unicamente el id de la clase)");
+                    idClase = sc.nextInt();
+
+                    clase = icesi.courses.get(idClase);
+
+                    System.out.println("Id:" + clase.getId() + " Nombre:" + clase.getName() + " Salón:" + clase.getClassroom() + " Profesor(a):" + clase.getTeacher().getName() +
+                            "\nEsta es la lista de estudiantes incritos:");
+
+                    for (Student student : clase.getStudentList()){
+                        System.out.println("Id:" + student.getId() + " Nombre:" + student.getName() + " Edad:" + student.getAge());
+                    }
+                    System.out.println("---------------------------------------------------------------------------------------------------------");
                     break;
                 case 3:
-                    System.out.println("CREANDO ESTUDIANTE");
+                    String nombre1;
+                    String id1;
+                    int edad1;
+                    int clase1;
+                    sc.nextLine();
+                    System.out.println("Ingresa el nombre del nuevo estudiante");
+                    nombre1 = sc.nextLine();
+
+                    System.out.println("Ingresa el id del nuevo estudiante");
+                    id1 = sc.nextLine();
+
+                    System.out.println("Ingresa la edad del nuevo estudiante");
+                    edad1 = sc.nextInt();
+
+                    Student newStudent = new Student(id1, nombre1, edad1);
+                    System.out.println("Creando estudiante..." +
+                            "\nEstas son nuestras clases disponibles:");
+                    for (Course course : icesi.courses){
+                        System.out.println("Id: " + course.getId() + " Nombre: " + course.getName());
+                    }
+                    System.out.println("A qué clase le gustaria añadir al nuevo estudiante? (Escriba unicamente el id de la clase)");
+                    clase1 = sc.nextInt();
+                    icesi.courses.get(clase1).addStudent(newStudent);
+                    System.out.println("Estudiante añadido exitosamente. Puede verificar el proceso seleccionando la opción 2." +
+                            "\n---------------------------------------------------------------------------------------------------------");
+                    /*Course claseprueba = icesi.courses.get(clase1);
+                    for(Student studiante : claseprueba.getStudentList()){
+                        System.out.println(studiante.getName());
+                    }*/
+
                     break;
                 case 4:
                     System.out.println("CREANDO CLASES");

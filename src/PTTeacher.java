@@ -1,8 +1,8 @@
 public class PTTeacher extends Teacher {
 
-    private int activeHoursPerWeek;
+    private double activeHoursPerWeek;
 
-    public PTTeacher(String name, double baseSalary, int activeHoursPerWeek) {
+    public PTTeacher(String name, double baseSalary, double activeHoursPerWeek) {
 
         super(name, baseSalary);
         this.activeHoursPerWeek = activeHoursPerWeek;
@@ -12,5 +12,13 @@ public class PTTeacher extends Teacher {
     public double calculateSalary() {
 
         return baseSalary * activeHoursPerWeek;
+    }
+
+    public double getActiveHoursPerWeek() {
+        return activeHoursPerWeek;
+    }
+
+    public void setActiveHoursPerWeek(double activeHoursPerWeek) {
+        this.activeHoursPerWeek = activeHoursPerWeek;
     }
 }
